@@ -13,6 +13,24 @@ class TicketsController < ApplicationController
     render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
   end
 
+  def index
+    @tickets = Ticket.includes(:excavator).all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @tickets, include: [:excavator] }
+    end
+  end
+
+  def show
+    @ticket = Ticket.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @ticket, include: [:excavator] }
+    end
+  end
+
   private
 
   def ticket_params

@@ -1,0 +1,37 @@
+<h1>All Tickets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request Number</th>
+      <th>Sequence Number</th>
+      <th>Request Type</th>
+      <th>Response Due</th>
+      <th>Primary Service Area</th>
+      <th>Additional Service Areas</th>
+      <th>Excavator Company</th>
+      <th>Crew on Site</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.request_number %></td>
+        <td><%= ticket.sequence_number %></td>
+        <td><%= ticket.request_type %></td>
+        <td><%= ticket.response_due_date_time.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= ticket.primary_service_area_code %></td>
+        <td>
+          <% ticket.additional_service_area_codes.each do |code| %>
+            <%= code %><br />
+          <% end %>
+        </td>
+        <td><%= ticket.excavator.company_name %></td>
+        <td><%= ticket.excavator.crew_on_site ? 'Yes' : 'No' %></td>
+        <td><%= link_to 'Show', ticket_path(ticket) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

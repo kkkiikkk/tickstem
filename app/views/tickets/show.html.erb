@@ -1,0 +1,41 @@
+<h1>Ticket Details</h1>
+
+<p>
+  <strong>Request Number:</strong> <%= @ticket.request_number %>
+</p>
+
+<p>
+  <strong>Sequence Number:</strong> <%= @ticket.sequence_number %>
+</p>
+
+<p>
+  <strong>Request Type:</strong> <%= @ticket.request_type %>
+</p>
+
+<p>
+  <strong>Response Due Date:</strong> <%= @ticket.response_due_date_time.strftime('%Y-%m-%d %H:%M:%S') %>
+</p>
+
+<p>
+  <strong>Primary Service Area Code:</strong> <%= @ticket.primary_service_area_code %>
+</p>
+
+<p>
+  <strong>Additional Service Area Codes:</strong>
+  <ul>
+    <% @ticket.additional_service_area_codes.each do |code| %>
+      <li><%= code %></li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Excavator Details:</strong>
+  <ul>
+    <li><strong>Company Name:</strong> <%= @ticket.excavator.company_name %></li>
+    <li><strong>Address:</strong> <%= @ticket.excavator.address %></li>
+    <li><strong>Crew On Site:</strong> <%= @ticket.excavator.crew_on_site ? 'Yes' : 'No' %></li>
+  </ul>
+</p>
+
+<%= link_to 'Back to Tickets', tickets_path %>
