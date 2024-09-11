@@ -1,0 +1,41 @@
+<% provide :head_tags do %>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      function initMap(polygonCoordinates) {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 11,
+          center: {
+            lat: polygonCoordinates[0][1],
+            lng: polygonCoordinates[0][0],
+          },
+        });
+
+        const outerCoords = polygonCoordinates.map(function (coord) {
+          return { lat: coord[1], lng: coord[0] };
+        });
+
+        map.data.add({
+          geometry: new google.maps.Data.Polygon([outerCoords]),
+        });
+      }
+
+      function parsePolygon(polygonString) {
+        const coordinatesString = polygonString.replace(/POLYGON\(\(|\)\)/g, "");
+        const coordinatesArray = coordinatesString.split(",").map(function (coord) {
+          const lon_lat = coord.trim().split(" ");
+          return [parseFloat(lon_lat[0]), parseFloat(lon_lat[1])];
+        });
+        return coordinatesArray;
+      }
+
+      const polygonString = "<%= j ticket.digsite_info %>";
+      const coordinates = parsePolygon(polygonString);
+
+      initMap(coordinates);
+    });
+  </script>
+<% end %>
+
+<p>
+  <div id="map"></div>
+</p>

@@ -39,3 +39,5 @@
 </p>
 
 <%= link_to 'Back to Tickets', tickets_path %>
+
+<%= render partial: 'tickets/map', locals: { ticket: @ticket } %>
