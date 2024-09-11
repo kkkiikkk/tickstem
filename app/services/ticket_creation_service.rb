@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TicketCreationService
   def initialize(ticket_params)
     @ticket_params = ticket_params

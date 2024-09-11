@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::TicketsController < ApplicationController
   protect_from_forgery with: :null_session
 
@@ -10,7 +12,7 @@ class Api::TicketsController < ApplicationController
       excavator_creation_service.create!
     end
 
-    render json: { message: "Ticket and Excavator created successfully" }, status: :created
+    render json: { message: 'Ticket and Excavator created successfully' }, status: :created
   rescue ActiveRecord::RecordInvalid => e
     render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
   end
@@ -30,7 +32,7 @@ class Api::TicketsController < ApplicationController
 
   def excavator_params
     params.permit(
-      Excavator: [:CompanyName, :Address, :City, :State, :Zip, :CrewOnsite]
+      Excavator: %i[:CompanyName :Address :City :State :Zip :CrewOnsite]
     )
   end
 end

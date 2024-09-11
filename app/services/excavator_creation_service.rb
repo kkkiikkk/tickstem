@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExcavatorCreationService
   def initialize(excavator_params, ticket_id)
     @excavator_params = excavator_params
